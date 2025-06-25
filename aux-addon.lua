@@ -3,6 +3,8 @@ module 'aux'
 local T = require 'T'
 local post = require 'aux.tabs.post'
 
+M.USE_BLIZZARD_THEME = true
+
 M.print = T.vararg-function(arg)
 	DEFAULT_CHAT_FRAME:AddMessage(LIGHTYELLOW_FONT_COLOR_CODE .. '<aux> ' .. join(map(arg, tostring), ' '))
 end

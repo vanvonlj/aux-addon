@@ -11,9 +11,21 @@ end
 do
 	local frame = CreateFrame('Frame', 'aux_frame', UIParent)
 	tinsert(UISpecialFrames, 'aux_frame')
-	gui.set_window_style(frame)
+    if not gui.is_blizzard() then
+        gui.set_window_style(frame)
+    end
 	gui.set_size(frame, 768, 447)
-	frame:SetPoint('LEFT', 100, 0)
+    if gui.is_blizzard() then
+        local frameBorder = CreateFrame('Frame', '$parentBorder', frame)
+        frameBorder:SetWidth(frame:GetWidth() + 24)
+        frameBorder:SetHeight(frame:GetHeight() + 24)
+        frameBorder:SetPoint('CENTER', frame, 'CENTER')
+        frameBorder:SetBackdrop({edgeFile = [[Interface\Tooltips\UI-Tooltip-Border]], edgeSize = 24, 
+            tile = true, tileSize = 24, bgFile = [[Interface\DialogFrame\UI-DialogBox-Background]], 
+            insets = { 
+                left = 6, right = 6, top = 6, bottom = 6 }})
+    end
+    frame:SetPoint('LEFT', 100, 0)
 	frame:SetToplevel(true)
 	frame:SetMovable(true)
 	frame:EnableMouse(true)
@@ -38,13 +50,15 @@ do
 	gui.set_size(btn, 60, 24)
 	btn:SetText('Close')
 	btn:SetScript('OnClick', function() frame:Hide() end)
+    btn:SetFrameLevel(btn:GetFrameLevel() + 2)
 	close_button = btn
 end
 do
 	local btn = gui.button(frame, gui.font_size.small)
 	btn:SetPoint('RIGHT', close_button, 'LEFT' , -5, 0)
-	gui.set_size(btn, 60, 24)
+	gui.set_size(btn, gui.is_blizzard() and 80 or 60, 24)
 	btn:SetText(color.blizzard'Blizzard UI')
+    btn:SetFrameLevel(btn:GetFrameLevel() + 2)
 	btn:SetScript('OnClick',function()
 		if AuctionFrame:IsVisible() then HideUIPanel(AuctionFrame) else ShowUIPanel(AuctionFrame) end
 	end)

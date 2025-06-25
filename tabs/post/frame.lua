@@ -8,6 +8,8 @@ local listing = require 'aux.gui.listing'
 local item_listing = require 'aux.gui.item_listing'
 local search_tab = require 'aux.tabs.search'
 
+local THEME_PADDING = gui.is_blizzard() and 6.5 or 2.5
+
 frame = CreateFrame('Frame', nil, aux.frame)
 frame:SetAllPoints()
 frame:SetScript('OnUpdate', on_update)
@@ -25,17 +27,16 @@ frame.inventory:SetPoint('BOTTOMLEFT', 0, 0)
 
 frame.parameters = gui.panel(frame.content)
 frame.parameters:SetHeight(173)
-frame.parameters:SetPoint('TOPLEFT', frame.inventory, 'TOPRIGHT', 2.5, 0)
+frame.parameters:SetPoint('TOPLEFT', frame.inventory, 'TOPRIGHT', THEME_PADDING, 0)
 frame.parameters:SetPoint('TOPRIGHT', 0, 0)
 
 frame.bid_listing = gui.panel(frame.content)
 frame.bid_listing:SetHeight(228)
 frame.bid_listing:SetWidth(271.5)
-frame.bid_listing:SetPoint('BOTTOMLEFT', frame.inventory, 'BOTTOMRIGHT', 2.5, 0)
+frame.bid_listing:SetPoint('BOTTOMLEFT', frame.inventory, 'BOTTOMRIGHT', THEME_PADDING, 0)
 
 frame.buyout_listing = gui.panel(frame.content)
-frame.buyout_listing:SetHeight(228)
-frame.buyout_listing:SetWidth(271.5)
+frame.buyout_listing:SetPoint('TOPLEFT', frame.parameters, 'BOTTOMLEFT', 0, -THEME_PADDING)
 frame.buyout_listing:SetPoint('BOTTOMRIGHT', 0, 0)
 
 do
@@ -188,7 +189,7 @@ end
 do
     local slider = gui.slider(frame.parameters)
     slider:SetValueStep(1)
-    slider:SetPoint('TOPLEFT', stack_size_slider, 'BOTTOMLEFT', 0, -32)
+    slider:SetPoint('TOPLEFT', stack_size_slider, 'BOTTOMLEFT', 0, gui.is_blizzard() and -25 or -32)
     slider:SetWidth(190)
     slider:SetScript('OnValueChanged', function()
         quantity_update()
@@ -210,7 +211,7 @@ do
 end
 do
     local dropdown = gui.dropdown(frame.parameters)
-    dropdown:SetPoint('TOPLEFT', stack_count_slider, 'BOTTOMLEFT', 0, -22)
+    dropdown:SetPoint('TOPLEFT', stack_count_slider, 'BOTTOMLEFT', 0, gui.is_blizzard() and -10 or -22)
     dropdown:SetWidth(90)
     local label = gui.label(dropdown, gui.font_size.small)
     label:SetPoint('BOTTOMLEFT', dropdown, 'TOPLEFT', -2, -3)
@@ -317,9 +318,16 @@ do
 end
 
 function aux.handle.LOAD()
-	if not aux.account_data.post_bid then
+    if aux.account_data.post_bid then
+        frame.bid_listing:SetPoint('TOPLEFT', frame.parameters, 'BOTTOMLEFT', 0, -THEME_PADDING)
+        frame.bid_listing:SetPoint('BOTTOMLEFT', frame.inventory, 'BOTTOMRIGHT', THEME_PADDING, 0)
+        frame.bid_listing:SetWidth(271.5 - (THEME_PADDING / 2))
+
+        frame.buyout_listing:ClearAllPoints()
+        frame.buyout_listing:SetPoint('TOPLEFT', frame.bid_listing, 'TOPRIGHT', THEME_PADDING, 0)
+        frame.buyout_listing:SetPoint('BOTTOMRIGHT', 0, 0)
+    else
 		frame.bid_listing:Hide()
-		frame.buyout_listing:SetPoint('BOTTOMLEFT', frame.inventory, 'BOTTOMRIGHT', 2.5, 0)
 		buyout_listing:SetColInfo{
 			{name='Auctions', width=.15, align='CENTER'},
 			{name='Time Left', width=.15, align='CENTER'},

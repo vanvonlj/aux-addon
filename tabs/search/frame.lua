@@ -11,6 +11,7 @@ local listing = require 'aux.gui.listing'
 local auction_listing = require 'aux.gui.auction_listing'
 
 local FILTER_SPACING = 28.5
+local THEME_PADDING = gui.is_blizzard() and 4 or 0
 
 frame = CreateFrame('Frame', nil, aux.frame)
 frame:SetAllPoints()
@@ -27,7 +28,7 @@ frame.saved = CreateFrame('Frame', nil, frame)
 frame.saved:SetAllPoints(aux.frame.content)
 
 frame.saved.favorite = gui.panel(frame.saved)
-frame.saved.favorite:SetWidth(393)
+frame.saved.favorite:SetWidth(393 - THEME_PADDING)
 frame.saved.favorite:SetPoint('TOPLEFT', 0, 0)
 frame.saved.favorite:SetPoint('BOTTOMLEFT', 0, 0)
 
@@ -66,7 +67,7 @@ end
 do
 	local btn = gui.button(frame, gui.font_size.small)
 	btn:SetHeight(25)
-	btn:SetWidth(60)
+	btn:SetWidth(gui.is_blizzard() and 70 or 60)
 	btn:Hide()
 	btn:SetText(aux.color.label.enabled'Real Time')
 	btn:SetScript('OnClick', function()
@@ -84,7 +85,7 @@ do
 	end
 	do
 		local editbox = gui.editbox(range_button)
-		editbox:SetPoint('LEFT', range_button, 'RIGHT', 4, 0)
+		editbox:SetPoint('LEFT', range_button, 'RIGHT', gui.is_blizzard() and 8 or 4, 0)
 		editbox:SetWidth(40)
 		editbox:SetHeight(25)
 		editbox:SetAlignment('CENTER')
@@ -104,7 +105,7 @@ do
 	end
 	do
 		local editbox = gui.editbox(range_button)
-		editbox:SetPoint('LEFT', first_page_input, 'RIGHT', 5.8, 0)
+		editbox:SetPoint('LEFT', first_page_input, 'RIGHT', gui.is_blizzard() and 11 or 5.8, 0)
 		editbox:SetWidth(40)
 		editbox:SetHeight(25)
 		editbox:SetAlignment('CENTER')
@@ -305,7 +306,7 @@ end
 do
     local editbox = gui.editbox(frame.filter)
     editbox:SetPoint('TOPLEFT', name_input, 'BOTTOMLEFT', 0, -FILTER_SPACING)
-    editbox:SetWidth(125)
+    editbox:SetWidth(gui.is_blizzard() and 123 or 125)
     editbox:SetAlignment('CENTER')
     editbox:SetNumeric(true)
     editbox:SetScript('OnTabPressed', function()
@@ -330,8 +331,8 @@ do
 end
 do
     local editbox = gui.editbox(frame.filter)
-    editbox:SetPoint('TOPLEFT', min_level_input, 'TOPRIGHT', 10, 0)
-    editbox:SetWidth(125)
+    editbox:SetPoint('TOPLEFT', min_level_input, 'TOPRIGHT', gui.is_blizzard() and 14 or 10, 0)
+    editbox:SetWidth(gui.is_blizzard() and 123 or 125)
     editbox:SetAlignment('CENTER')
     editbox:SetNumeric(true)
     editbox:SetScript('OnTabPressed', function()
@@ -350,7 +351,7 @@ do
 	    update_form()
     end
     local label = gui.label(editbox, gui.font_size.medium)
-    label:SetPoint('RIGHT', editbox, 'LEFT', -3, 0)
+    label:SetPoint('RIGHT', editbox, 'LEFT', gui.is_blizzard() and -7 or -3, 0)
     label:SetText('-')
     max_level_input = editbox
 end
@@ -418,6 +419,12 @@ end
 gui.vertical_line(frame.filter, 332)
 do
     local dropdown = gui.dropdown(frame.filter)
+    if gui.is_blizzard() then
+        local button = _G[dropdown:GetName() .. 'Button']
+        button:ClearAllPoints()
+        button:SetScale(.9)
+        button:SetPoint('RIGHT', dropdown, 0, 0)
+    end
     dropdown:SetPoint('TOPRIGHT', -174.5, -10)
     dropdown:SetWidth(150)
     UIDropDownMenu_Initialize(dropdown, initialize_filter_dropdown)
@@ -425,6 +432,11 @@ do
         UIDropDownMenu_Initialize(this, initialize_filter_dropdown)
     end)
     _G[dropdown:GetName() .. 'Text']:Hide()
+    if gui.is_blizzard() then
+        _G[dropdown:GetName() .. 'Left']:Hide()
+        _G[dropdown:GetName() .. 'Middle']:Hide()
+        _G[dropdown:GetName() .. 'Right']:Hide()
+    end
     local label = gui.label(dropdown, gui.font_size.medium)
     label:SetPoint('RIGHT', dropdown, 'LEFT', -15, 0)
     label:SetText('Component')
