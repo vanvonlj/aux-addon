@@ -4,7 +4,7 @@
 * Accurate auction durations for Turtle WoW.
 * Autocompletion for custom Turtle WoW items.
 * Display Unit Vendor Price
-* Deposit fees have been reduced by 40%, this isn't accurate but should be closer to the real cost. I'd like to have it accurate eventually, if you know what turtle's calculations are please reach out to me.
+* The displayed deposit fee has been reduced by 40%, this isn't accurate but should be closer to the real cost. I'd like to have it accurate eventually, if you know what turtle's calculations are feel free to reach out to me or even send a pr.
 
 # aux - WoW 1.12 AddOn
 
