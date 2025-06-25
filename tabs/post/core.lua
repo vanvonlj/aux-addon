@@ -336,6 +336,7 @@ function update_item_configuration()
         deposit:Hide()
         duration_dropdown:Hide()
         hide_checkbox:Hide()
+        vendor_price_label:Hide()
     else
 		unit_start_price_input:Show()
         unit_buyout_price_input:Show()
@@ -344,6 +345,7 @@ function update_item_configuration()
         deposit:Show()
         duration_dropdown:Show()
         hide_checkbox:Show()
+        vendor_price_label:Show()
 
         item.texture:SetTexture(selected_item.texture)
         item.name:SetText('[' .. selected_item.name .. ']')
@@ -367,6 +369,18 @@ function update_item_configuration()
             local amount = floor(selected_item.unit_vendor_price * deposit_factor * stack_size) * stack_count * duration_factor
             amount = floor(amount * 0.6) --according to nelethor this should be more accurate, would like to get accurate fee eventually
             deposit:SetText('Deposit: ' .. money.to_string(amount, nil, nil, aux.color.text.enabled))
+        end
+
+        --vendor price
+        do
+            local unit_vendor_price = selected_item.unit_vendor_price
+            if not unit_vendor_price then
+                vendor_price_label:SetText("Unit Vendor Price: N/A")
+            elseif unit_vendor_price == 0 then
+                vendor_price_label:SetText("Unit Vendor Price: None")
+            else
+                vendor_price_label:SetText("Unit Vendor Price: " .. money.to_string(unit_vendor_price, nil, nil, aux.color.text.enabled))
+            end
         end
 
         refresh_button:Enable()

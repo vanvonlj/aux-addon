@@ -307,8 +307,13 @@ do
 end
 do
 	local label = gui.label(frame.parameters, gui.font_size.medium)
-	label:SetPoint('TOPLEFT', unit_buyout_price_input, 'BOTTOMLEFT', 0, -24)
+	label:SetPoint('TOPLEFT', unit_buyout_price_input, 'BOTTOMLEFT', -180, -24)
 	deposit = label
+end
+do
+    local label = gui.label(frame.parameters, gui.font_size.medium)
+    label:SetPoint('TOPLEFT', unit_buyout_price_input, 'BOTTOMLEFT', 0, -24)
+    vendor_price_label = label
 end
 
 function aux.handle.LOAD()
