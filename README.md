@@ -3,7 +3,7 @@
 * Shares some price data through the LFT chat when searching the AH, use **/aux sharing** to disable sending and receiving data.
 * Accurate auction durations for Turtle WoW.
 * Autocompletion for custom Turtle WoW items.
-* Displays Unit Vendor Price   
+* Display Unit Vendor Price
 * Deposit fees have been reduced by 40%, this isn't accurate but should be closer to the real cost. I'd like to have it accurate eventually, if you know what turtle's calculations are please reach out to me.
 
 # aux - WoW 1.12 AddOn
