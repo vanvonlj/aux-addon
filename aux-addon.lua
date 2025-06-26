@@ -39,7 +39,7 @@ do
                 auction_ui_loaded()
 			end
 		elseif event == 'VARIABLES_LOADED' then
-            gui.set_global_theme(aux and aux.account.theme)
+            gui.set_global_theme(aux and aux.account and aux.account.theme)
             for _, f in handlers_INIT_UI do f() end
             for _, f in handlers_LOAD do f() end
 		elseif event == 'PLAYER_LOGIN' then
