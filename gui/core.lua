@@ -107,8 +107,14 @@ do
 	end
 end
 
+local using_blizzard_theme = false
+
+function M.set_global_theme(theme)
+    using_blizzard_theme = theme == 'blizzard'
+end
+
 function M.is_blizzard()
-    return aux.USE_BLIZZARD_THEME
+    return using_blizzard_theme
 end
 
 function M.set_size(frame, width, height)
