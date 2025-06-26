@@ -4,7 +4,6 @@ local T = require 'T'
 local aux = require 'aux'
 local info = require 'aux.util.info'
 local post = require 'aux.tabs.post'
-local gui = require 'aux.gui'
 
 function status(enabled)
 	return (enabled and aux.color.green'on' or aux.color.red'off')
@@ -91,8 +90,8 @@ function SlashCmdList.AUX(command)
 		aux.print('- clear item cache')
 		aux.print('- populate wdb')
 		aux.print('- sharing [' .. status(aux.account_data.sharing) .. ']')
-        aux.print('- theme [' .. aux.color[gui.is_blizzard() and 'red' or 'green']('default') .. ' | ' .. 
-            aux.color[gui.is_blizzard() and 'green' or 'red']('blizzard') .. ']')
+        aux.print('- theme [' .. aux.color[aux.account_data.theme == 'default' and 'green' or 'red']('default') .. ' | ' .. 
+            aux.color[aux.account_data.theme == 'blizzard' and 'green' or 'red']('blizzard') .. ']')
 		aux.print('- show hidden [' .. status(aux.account_data.showhidden) .. ']')
     end
 end
