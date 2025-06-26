@@ -7,6 +7,9 @@
 * Display Unit Vendor Price
 * The displayed deposit fee has been reduced by 40%, this isn't accurate but should be closer to the real cost. I'd like to have it accurate eventually, if you know what turtle's calculations are feel free to reach out to me or even send a pr.
 
+"Why is aux so slow on turtle wow?"    
+The rate at which the client receives auction data is intentionally limited by the server, there is nothing addons can do here.
+
 # aux - WoW 1.12 AddOn
 
 The most advanced auction house addOn for the 1.12 client with some features more advanced than anything even on retail.
