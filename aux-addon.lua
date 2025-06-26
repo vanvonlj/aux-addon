@@ -6,7 +6,6 @@ local gui = require 'aux.gui'
 
 M.print = T.vararg-function(arg)
 	DEFAULT_CHAT_FRAME:AddMessage(LIGHTYELLOW_FONT_COLOR_CODE .. '<aux> ' .. join(map(arg, tostring), ' '))
-	DEFAULT_CHAT_FRAME:AddMessage(LIGHTYELLOW_FONT_COLOR_CODE .. 'aux now comes with a new blizz-like theme by default, if you wish to continue using the old one use /aux theme')
 end
 
 local bids_loaded
@@ -46,6 +45,7 @@ do
 		elseif event == 'PLAYER_LOGIN' then
 			for _, f in handlers_LOAD2 do f() end
 			print('loaded - /aux')
+			DEFAULT_CHAT_FRAME:AddMessage(LIGHTYELLOW_FONT_COLOR_CODE .. 'aux now comes with a new blizz-like theme by default, if you wish to continue using the old one use /aux theme')
 		else
 			_M[event]()
 		end
