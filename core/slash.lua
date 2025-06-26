@@ -9,6 +9,10 @@ function status(enabled)
 	return (enabled and aux.color.green'on' or aux.color.red'off')
 end
 
+function warn_reload()
+    aux.print(aux.color.orange('A relog or reload is required for this change to take effect.'))
+end
+
 _G.SLASH_AUX1 = '/aux'
 function SlashCmdList.AUX(command)
 	if not command then return end
@@ -27,6 +31,7 @@ function SlashCmdList.AUX(command)
     elseif arguments[1] == 'post' and arguments[2] == 'bid' then
         aux.account_data.post_bid = not aux.account_data.post_bid
 	    aux.print('post bid ' .. status(aux.account_data.post_bid))
+        warn_reload()
     elseif arguments[1] == 'post' and arguments[2] == 'duration' and  T.map('6', post.DURATION_2, '24', post.DURATION_8, '72', post.DURATION_24)[arguments[3]] then
         aux.account_data.post_duration = T.map('6', post.DURATION_2, '24', post.DURATION_8, '72', post.DURATION_24)[arguments[3]]
         aux.print('post duration ' .. aux.color.blue(aux.account_data.post_duration / 60 * 3 .. 'h'))
@@ -61,6 +66,10 @@ function SlashCmdList.AUX(command)
 	elseif arguments[1] == 'sharing' then
 		aux.account_data.sharing = not aux.account_data.sharing
 		aux.print('sharing ' .. status(aux.account_data.sharing))
+    elseif arguments[1] == 'theme' and (arguments[2] == nil or (arguments[2] == 'legacy' or arguments[2] == 'blizzard')) then
+        aux.account_data.theme = arguments[2] or (aux.account_data.theme == 'blizzard' and 'legacy' or 'blizzard')
+        aux.print('theme ' .. aux.color.blue(aux.account_data.theme))
+        warn_reload()
 	elseif arguments[1] == 'show' and arguments[2] == 'hidden' then
 		aux.account_data.showhidden = not aux.account_data.showhidden
 		aux.print('show hidden ' .. status(aux.account_data.showhidden))
@@ -81,6 +90,8 @@ function SlashCmdList.AUX(command)
 		aux.print('- clear item cache')
 		aux.print('- populate wdb')
 		aux.print('- sharing [' .. status(aux.account_data.sharing) .. ']')
+        aux.print('- theme [' .. aux.color[aux.account_data.theme == 'blizzard' and 'green' or 'red']('blizzard') .. ' | ' .. 
+            aux.color[aux.account_data.theme == 'legacy' and 'green' or 'red']('legacy') .. ']')
 		aux.print('- show hidden [' .. status(aux.account_data.showhidden) .. ']')
     end
 end
