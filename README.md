@@ -56,7 +56,7 @@ The most advanced auction house addOn for the 1.12 client with some features mor
 **/aux post bid** (Adds a bid price listing to the post tab)<br/>
 **/aux crafting cost** (Toggles the crafting price information)<br/>
 **/aux post duration _hours_** (Sets the default auction duration to _2_/_8_/_24_ hours)<br/>
-**/aux sharing** (Enable or Disable auction data sharing as described above)<br/>
+**/aux sharing** (Enable or disable auction data sharing as described above)<br/>
 **/aux theme _blizzard|legacy_** (Switch between the two themes)<br/>
 ### Tooltip
 **/aux tooltip value**<br/>
