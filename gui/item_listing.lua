@@ -65,7 +65,7 @@ function M.new(parent, on_click, selected)
 
 	local rows = T.acquire()
 	local row_index = 1
-	local max_height = content_frame:GetHeight()
+	local max_height = content_frame:GetHeight() / content_frame:GetEffectiveScale()
 	local total_height = 0
 	while total_height + ROW_HEIGHT < max_height do
 		local row = CreateFrame('Frame', nil, content_frame)
