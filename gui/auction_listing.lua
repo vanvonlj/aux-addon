@@ -904,7 +904,7 @@ local methods = {
 function M.new(parent, rows, columns)
     local rt = CreateFrame('Frame', nil, parent)
     rt.columns = columns
-    rt.ROW_HEIGHT = (parent:GetHeight() - HEAD_HEIGHT - HEAD_SPACE) / rows
+    rt.ROW_HEIGHT = ((parent:GetHeight() / parent:GetEffectiveScale()) - HEAD_HEIGHT - HEAD_SPACE) / rows
     rt.expanded = {}
     rt.handlers = {}
     rt.sorts = {}

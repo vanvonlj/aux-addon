@@ -269,7 +269,7 @@ function M.new(parent)
     local st = CreateFrame('Frame', gui.unique_name(), parent)
     st:SetAllPoints()
 
-    st.numRows = max(floor((parent:GetHeight() - HEAD_HEIGHT - HEAD_SPACE) / ROW_HEIGHT), 0)
+    st.numRows = max(floor(((parent:GetHeight() / parent:GetEffectiveScale()) - HEAD_HEIGHT - HEAD_SPACE) / ROW_HEIGHT), 0)
 
     local contentFrame = CreateFrame('Frame', nil, st)
     contentFrame:SetPoint('TOPLEFT', 0, 0)
