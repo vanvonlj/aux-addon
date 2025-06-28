@@ -110,7 +110,7 @@ end
 local using_blizzard_theme = true
 
 function M.set_global_theme(theme)
-    using_blizzard_theme = theme ~= 'legacy'
+    using_blizzard_theme = theme ~= 'modern'
 end
 
 function M.is_blizzard()

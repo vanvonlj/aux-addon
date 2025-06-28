@@ -66,8 +66,8 @@ function SlashCmdList.AUX(command)
 	elseif arguments[1] == 'sharing' then
 		aux.account_data.sharing = not aux.account_data.sharing
 		aux.print('sharing ' .. status(aux.account_data.sharing))
-    elseif arguments[1] == 'theme' and (arguments[2] == nil or (arguments[2] == 'legacy' or arguments[2] == 'blizzard')) then
-        aux.account_data.theme = arguments[2] or (aux.account_data.theme == 'blizzard' and 'legacy' or 'blizzard')
+    elseif arguments[1] == 'theme' and (arguments[2] == nil or (arguments[2] == 'modern' or arguments[2] == 'blizzard')) then
+        aux.account_data.theme = arguments[2] or (aux.account_data.theme == 'blizzard' and 'modern' or 'blizzard')
         aux.print('theme ' .. aux.color.blue(aux.account_data.theme))
         warn_reload()
 	elseif arguments[1] == 'show' and arguments[2] == 'hidden' then
@@ -91,7 +91,7 @@ function SlashCmdList.AUX(command)
 		aux.print('- populate wdb')
 		aux.print('- sharing [' .. status(aux.account_data.sharing) .. ']')
         aux.print('- theme [' .. aux.color[aux.account_data.theme == 'blizzard' and 'green' or 'red']('blizzard') .. ' | ' .. 
-            aux.color[aux.account_data.theme == 'legacy' and 'green' or 'red']('legacy') .. ']')
+            aux.color[aux.account_data.theme == 'modern' and 'green' or 'red']('modern') .. ']')
 		aux.print('- show hidden [' .. status(aux.account_data.showhidden) .. ']')
     end
 end
